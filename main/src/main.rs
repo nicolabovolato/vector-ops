@@ -47,7 +47,7 @@ fn parse_vector(input: &str) -> Result<Vector<i32>, String> {
 }
 
 fn fmt_vector(v: Vector<i32>) -> String {
-    let mut v = v.as_slice();
+    let v = v.as_slice();
     let mut str = String::new();
 
     for (i, val) in v.iter().enumerate().rev() {
