@@ -8,12 +8,12 @@ pub trait VectorTrait:
     Clone
     + Copy
     + Default
-    + std::cmp::PartialEq
-    + std::ops::Add<Output = Self>
-    + std::ops::Mul<Output = Self>
-    + std::ops::Sub<Output = Self>
-    + std::ops::Div<Output = Self>
-    + std::ops::Rem<Output = Self>
+    + PartialEq
+    + Add<Output = Self>
+    + Mul<Output = Self>
+    + Sub<Output = Self>
+    + Div<Output = Self>
+    + Rem<Output = Self>
 {
 }
 
@@ -21,12 +21,12 @@ impl<T> VectorTrait for T where
     T: Clone
         + Copy
         + Default
-        + std::cmp::PartialEq
-        + std::ops::Add<Output = T>
-        + std::ops::Mul<Output = T>
-        + std::ops::Sub<Output = T>
-        + std::ops::Div<Output = T>
-        + std::ops::Rem<Output = T>
+        + PartialEq
+        + Add<Output = T>
+        + Mul<Output = T>
+        + Sub<Output = T>
+        + Div<Output = T>
+        + Rem<Output = T>
 {
 }
 
