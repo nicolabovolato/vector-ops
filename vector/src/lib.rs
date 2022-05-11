@@ -4,7 +4,7 @@ use std::vec;
 #[cfg(test)]
 mod test;
 
-trait VectorTrait:
+pub trait VectorTrait:
     Clone
     + Copy
     + Default
@@ -31,7 +31,7 @@ impl<T> VectorTrait for T where
 }
 
 #[derive(Debug, Clone, PartialEq)]
-struct Vector<T: VectorTrait> {
+pub struct Vector<T: VectorTrait> {
     inner: Vec<T>,
 }
 
