@@ -1,6 +1,9 @@
 use std::ops::{Add, Div, Mul, Rem, Sub};
 use std::vec;
 
+#[cfg(test)]
+mod test;
+
 trait VectorTrait:
     Clone
     + Copy
@@ -47,11 +50,11 @@ impl<T: VectorTrait> Vector<T> {
     }
 
     pub fn to_vec(&self) -> Vec<T> {
-        self.inner.clone()
+        self.inner.to_vec()
     }
 
     pub fn as_slice(&self) -> &[T] {
-        &self.inner
+        self.inner.as_slice()
     }
 }
 
@@ -92,9 +95,7 @@ impl<T: VectorTrait> Add for Vector<T> {
             result.push(*val1 + *val2);
         }
 
-        let mut v = Self::Output::from(result);
-        v.normalize();
-        v
+        Self::Output::from(result)
     }
 }
 
@@ -117,24 +118,20 @@ impl<T: VectorTrait> Sub for Vector<T> {
             result.push(*val1 - *val2);
         }
 
-        let mut v = Self::Output::from(result);
-        v.normalize();
-        v
+        Self::Output::from(result)
     }
 }
 
 impl<T: VectorTrait> Mul<T> for Vector<T> {
     type Output = Self;
     fn mul(self, rhs: T) -> Self::Output {
-        let mut v3: Vec<T> = Vec::new();
+        let mut result: Vec<T> = Vec::new();
 
-        for val1 in self.inner.iter() {
-            v3.push(*val1 * rhs);
+        for val in self.inner.iter() {
+            result.push(*val * rhs);
         }
 
-        let mut v = Self::Output::from(v3);
-        v.normalize();
-        v
+        Self::Output::from(result)
     }
 }
 
@@ -164,7 +161,6 @@ impl<T: VectorTrait> Vector<T> {
 
             dividend_mut = dividend_mut - Self::from(div_v);
             result.inner.insert(0, coefficient);
-            dividend_mut.normalize();
         }
 
         (result, dividend_mut)
